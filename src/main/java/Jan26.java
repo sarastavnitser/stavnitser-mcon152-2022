@@ -1,4 +1,4 @@
-public class jan26 {
+public class Jan26 {
     public static void main(String[] args) {
         double v, theta, t, g;
         v = 43.0;
@@ -15,14 +15,12 @@ public class jan26 {
     }
 
     public static double x(double v, double t, double theta) {
-        double x;
-        x = v * t * Math.cos(Math.toRadians(theta));
-        return x;
+
+        return v * t * Math.cos(Math.toRadians(theta));
     }
 
     public static double y(double v, double t, double theta, double g) {
-        double y;
-        y = v * t * Math.sin(Math.toRadians(theta)) - .5 * g * t * t;
-        return y;
+
+        return v * t * Math.sin(Math.toRadians(theta)) - .5 * g * t * t;
     }
 }

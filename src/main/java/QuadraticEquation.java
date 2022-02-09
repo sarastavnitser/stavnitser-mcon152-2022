@@ -13,10 +13,10 @@ public class QuadraticEquation {
 
     public double[] getX(){
         double[] results = new double[2];
-        double x1 = (-b + Math.sqrt(b*b - 4*a*c))/(2*a);
-        double x2 = (-b - Math.sqrt(b*b - 4*a*c))/(2*a);
-        results[0] = x1;
-        results[1] = x2;
+        double num = Math.sqrt(b*b - 4*a*c);
+        double denominator = (2*a);
+        results[0] = (-b + num) / denominator;
+        results[1] = (-b - num) / denominator;
         return results;
     }
 }
