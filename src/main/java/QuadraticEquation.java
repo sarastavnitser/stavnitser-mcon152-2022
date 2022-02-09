@@ -1,5 +1,3 @@
-import java.util.Queue;
-
 public class QuadraticEquation {
     private double a;
     private double b;

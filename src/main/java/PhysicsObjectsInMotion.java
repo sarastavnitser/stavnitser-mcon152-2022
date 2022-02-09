@@ -1,4 +1,4 @@
-public class Jan26 {
+public class PhysicsObjectsInMotion {
     public static void main(String[] args) {
         double v, theta, t, g;
         v = 43.0;
