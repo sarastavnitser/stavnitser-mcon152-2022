@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class ScrabbleGame {
 
@@ -9,6 +6,17 @@ public class ScrabbleGame {
     private List<Character> tiles = new ArrayList<>();
     private ScrabbleDictionary dictionary = new ScrabbleDictionary();
 
+    public static void main(String[] args) {
+        ScrabbleGame s = new ScrabbleGame();
+        System.out.println(s.tiles.toString());
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("word:");
+        String word = scanner.next();
+        if (!word.equals("")) {
+            System.out.println(s.playWord(word));
+        }
+        System.out.println(s.tiles.toString());
+    }
 
     public ScrabbleGame() {
         for (int i = 0; i < 7; i++) {
@@ -16,8 +24,8 @@ public class ScrabbleGame {
         }
     }
 
-    public void replenish(){
-        while(tiles.size()<7) {
+    public void replenish() {
+        while (tiles.size() < 7) {
             tiles.add((char) (new Random().nextInt(26) + 'a'));
         }
     }
@@ -30,9 +38,9 @@ public class ScrabbleGame {
      */
     public boolean playWord(String word) {
         boolean retVal = false;
-        ArrayList<Character> wordsArray = new ArrayList(Collections.singleton(word.toCharArray()));
+        char[] wordsArray = word.toCharArray();
         for (int i = 0; i < word.length(); i++) {
-            if (tiles.contains(wordsArray.get(i))) {
+            if (tiles.contains(wordsArray[i])) {
                 retVal = true;
             } else {
                 retVal = false;
@@ -40,12 +48,14 @@ public class ScrabbleGame {
             }
         }
         if (retVal) {
-            if (!dictionary.isWord(word.toUpperCase())) {
+            if (!dictionary.isWord(word)) {
                 retVal = false;
             }
         }
-        if (retVal){
-            tiles.removeAll(wordsArray);
+        if (retVal) {
+            for (char c : wordsArray) {
+                tiles.remove(wordsArray[c]);
+            }
             replenish();
         }
         return retVal;
