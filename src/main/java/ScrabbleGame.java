@@ -4,7 +4,13 @@ public class ScrabbleGame {
 
     private List<String> playedWords = new ArrayList<>();
     private List<Character> tiles = new ArrayList<>();
-    private ScrabbleDictionary dictionary = new ScrabbleDictionary();
+    private ScrabbleDictionary dictionary;
+    private LetterPool letterPool;
+
+    public ScrabbleGame(ScrabbleDictionary dictionary, LetterPool letterPool){
+        this.dictionary = dictionary;
+        this.letterPool = letterPool;
+    }
 
     public static void main(String[] args) {
         ScrabbleGame s = new ScrabbleGame();
@@ -37,28 +43,45 @@ public class ScrabbleGame {
      * @param word
      */
     public boolean playWord(String word) {
-        boolean retVal = false;
-        char[] wordsArray = word.toCharArray();
-        for (int i = 0; i < word.length(); i++) {
-            if (tiles.contains(wordsArray[i])) {
-                retVal = true;
-            } else {
-                retVal = false;
-                break;
+        if (!dictionary.isWord(word)) {
+            return false;
+        }
+
+        char[] characters = word.toUpperCase(Locale.ROOT).toCharArray();
+        for (int i = 0; i < characters.length; i++) {
+            if (!tiles.remove((Character) characters[i])) {
+                return true;
             }
         }
-        if (retVal) {
-            if (!dictionary.isWord(word)) {
-                retVal = false;
-            }
+        playedWords.add(word);
+        for (int i = tiles.size(); i < 7; i++) {
+
         }
-        if (retVal) {
-            for (char c : wordsArray) {
-                tiles.remove(wordsArray[c]);
-            }
-            replenish();
-        }
-        return retVal;
+
+        return true;
     }
+//        boolean retVal = false;
+//        char[] wordsArray = word.toCharArray();
+//        for (int i = 0; i < word.length(); i++) {
+//            if (tiles.contains(wordsArray[i])) {
+//                retVal = true;
+//            } else {
+//                retVal = false;
+//                break;
+//            }
+//        }
+//        if (retVal) {
+//            if (!dictionary.isWord(word)) {
+//                retVal = false;
+//            }
+//        }
+//        if (retVal) {
+//            for (char c : wordsArray) {
+//                tiles.remove(wordsArray[c]);
+//            }
+//            replenish();
+//        }
+//        return retVal;
+//    }
 
 }
