@@ -5,10 +5,10 @@ import java.util.Scanner;
 
 public class ScrabbleDictionary {
 
-    private HashMap<String, String> words = new HashMap<>();
+    private final HashMap<String, String> words = new HashMap<>();
 
     public ScrabbleDictionary() {
-        File file = new File("/Users/sarastavnitser/IdeaProjects/DataStructures/out/production/DataStructures/MCON152/dictionary.txt");
+        File file = new File("dictionary.txt");
         try {
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()) {

@@ -43,45 +43,42 @@ public class ScrabbleGame {
      * @param word
      */
     public boolean playWord(String word) {
-        if (!dictionary.isWord(word)) {
-            return false;
-        }
+//        if (!dictionary.isWord(word)) {
+//            return false;
+//        }
+//
+//        char[] characters = word.toUpperCase(Locale.ROOT).toCharArray();
+//        for (int i = 0; i < characters.length; i++) {
+//            if (!tiles.remove((Character) characters[i])) {
+//                return true;
+//            }
+//        }
+//        playedWords.add(word);
+//        for (int i = tiles.size(); i < 7; i++) {
+//
+//        }
+//
+//        return true;
+//    }
 
-        char[] characters = word.toUpperCase(Locale.ROOT).toCharArray();
-        for (int i = 0; i < characters.length; i++) {
-            if (!tiles.remove((Character) characters[i])) {
-                return true;
+        char[] wordsArray = word.toUpperCase().toCharArray();
+        for (int i = 0; i < word.length(); i++) {
+            if (!tiles.contains(wordsArray[i])) {
+                return false;
             }
         }
-        playedWords.add(word);
-        for (int i = tiles.size(); i < 7; i++) {
 
-        }
+            if (!dictionary.isWord(word)) {
+                return  false;
+            }
+
+
+            for (char c : wordsArray) {
+                tiles.remove(wordsArray[c]);
+            }
+            replenish();
 
         return true;
     }
-//        boolean retVal = false;
-//        char[] wordsArray = word.toCharArray();
-//        for (int i = 0; i < word.length(); i++) {
-//            if (tiles.contains(wordsArray[i])) {
-//                retVal = true;
-//            } else {
-//                retVal = false;
-//                break;
-//            }
-//        }
-//        if (retVal) {
-//            if (!dictionary.isWord(word)) {
-//                retVal = false;
-//            }
-//        }
-//        if (retVal) {
-//            for (char c : wordsArray) {
-//                tiles.remove(wordsArray[c]);
-//            }
-//            replenish();
-//        }
-//        return retVal;
-//    }
 
 }
