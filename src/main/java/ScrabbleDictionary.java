@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class ScrabbleDictionary {
 
-    private final HashMap<String, String> words = new HashMap<>();
+    private HashMap<String, String> words = new HashMap<>();
 
     public ScrabbleDictionary() {
         File file = new File("dictionary.txt");
