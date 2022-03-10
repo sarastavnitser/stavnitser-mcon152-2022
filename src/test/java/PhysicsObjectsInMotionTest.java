@@ -23,6 +23,6 @@ class PhysicsObjectsInMotionTest {
         //when
         double result = proj.y(43.0, 6.0, 52.0, 9.8);
         //then
-        assertEquals(6.906774430534284, result);
+        assertEquals(26.906774430534284, result);
     }
 }
