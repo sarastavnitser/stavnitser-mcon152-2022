@@ -11,9 +11,9 @@ class RPNTest {
     //given
         RPN rpn = new RPN();
     //when
-        Double result = rpn.findRPNResult("3 5 +");
+        String result = rpn.findRPNResult("3 5 +");
     //then
-        assertEquals(8.0, result);
+        assertEquals("8.0", result);
     }
     @Test
     public void findResultLong(){
@@ -21,10 +21,10 @@ class RPNTest {
         RPN rpn = new RPN();
 
         //when
-        Double result = rpn.findRPNResult("2 5 * 4 + 3 2 * 1 + / ");
+        String result = rpn.findRPNResult("2 5 * 4 + 3 2 * 1 + / ");
 
         //then
-        assertEquals(2.0, result);
+        assertEquals("2.0", result);
     }
 
     @Test
@@ -33,10 +33,10 @@ class RPNTest {
         RPN rpn = new RPN();
 
         //when
-        Double result = rpn.findRPNResult("a b c");
+        String result = rpn.findRPNResult("a b c");
 
         //then
-        assertNull(result);
+        assertEquals("unexpected symbol", result);
     }
 
 

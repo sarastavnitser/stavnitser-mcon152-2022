@@ -25,7 +25,7 @@ public class RPN {
 
 
             } else {
-                Double answer = findRPNResult(elements);
+                String answer = findRPNResult(elements);
                 System.out.println(answer);
 
 
@@ -33,7 +33,7 @@ public class RPN {
         }
     }
 
-    Double findRPNResult(String elements) {
+    String findRPNResult(String elements) {
         boolean showResult = true;
         String[] operands = new String[]{"+", "-", "*", "/"};
         Double retVal = null;
@@ -63,18 +63,21 @@ public class RPN {
                         left = stack.pop();
 
                     } else {
-                        System.out.println("Syntax error");
+//                        System.out.println("Syntax error");
+
                         elementsArray.clear();
                         showResult = false;
                         retVal = null;
-                        break;
+                        return "Syntax error";
+
                     }
                 } else {
-                    System.out.println("Syntax error");
+//                    System.out.println("Syntax error");
                     elementsArray.clear();
                     showResult = false;
                     retVal = null;
-                    break;
+                    return "Syntax error";
+
                 }
 
                 switch (operator) {
@@ -92,7 +95,8 @@ public class RPN {
                         break;
 
                     default:
-                        throw new IllegalStateException("Unexpected value: " + operator);
+                        return ("Unexpected value: " + operator.toString());
+//                        throw new IllegalStateException("Unexpected value: " + operator);
                 }
                 elementsArray.remove(0);
 
@@ -101,10 +105,11 @@ public class RPN {
 
 
             } else {
-                System.out.println("unexpected symbol");
+//                System.out.println("unexpected symbol");
                 showResult = false;
                 retVal = null;
-                break;
+                return "unexpected symbol";
+
             }
 
 
@@ -114,10 +119,11 @@ public class RPN {
             retVal = stack.pop();
 
             if (!stack.empty()) {
-                System.out.println("extra junk ignored");
+                return (String.valueOf(retVal) + "\nextra junk ignored");
+//                System.out.println("extra junk ignored");
             }
         }
-        return retVal;
+        return String.valueOf(retVal);
     }
 
     private ArrayList<String> evaluate(String s) {
