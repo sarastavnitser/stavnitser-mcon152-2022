@@ -10,6 +10,7 @@ public class ScrabbleFrame extends JFrame {
     private JLabel[] tiles;
     private ScrabbleGame scrabbleGame;
     private JTextField inputField;
+    private JLabel errorMessageLabel;
 
     public ScrabbleFrame() {
         setTitle("Touro Scrabble");
@@ -42,6 +43,9 @@ public class ScrabbleFrame extends JFrame {
 
         JLabel outputLabel = new JLabel("OUTPUT");
         verticalPanel.add(outputLabel);
+
+        errorMessageLabel = new JLabel();
+        add(errorMessageLabel);
     }
 
     private void addTilesPanel(JPanel verticalPanel) {
@@ -59,7 +63,7 @@ public class ScrabbleFrame extends JFrame {
 
     public void onSubmitClicked(ActionEvent actionEvent) {
         String word = inputField.getText();
-        if (scrabbleGame.playWord(word)) {
+        if (scrabbleGame.playWord(word) == "TRUE") {
             score++;
             scoreLabel.setText(String.valueOf(score));
 
@@ -67,6 +71,8 @@ public class ScrabbleFrame extends JFrame {
                 tiles[i].setText((scrabbleGame.tiles.get(i).toString()));
 
             }
+        } else {
+            errorMessageLabel.setText(scrabbleGame.playWord(word));
         }
     }
 

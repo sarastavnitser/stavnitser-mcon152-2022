@@ -22,7 +22,7 @@ class ScrabbleGameTest {
         // when
 
         // then
-        assertTrue(game.playWord("HELLO"));
+        assertEquals("TRUE", game.playWord("HELLO"));
         Mockito.verify(letterPool, Mockito.times(7+5))
                 .getRandomLetter();
         assertTrue(game.playedWords.contains("HELLO"));
@@ -44,7 +44,7 @@ class ScrabbleGameTest {
         // when
 
         // then
-        assertFalse(game.playWord("LOGO"));
+        assertEquals("NOT IN TILES", game.playWord("LOGO"));
         assertTrue(game.playedWords.isEmpty());
         Mockito.verify(letterPool, Mockito.times(7))
                 .getRandomLetter();
@@ -60,12 +60,12 @@ class ScrabbleGameTest {
         ScrabbleGame game = new ScrabbleGame(dictionary, letterPool);
 
         // when
-        boolean val = game.playWord("HEL");
+        String val = game.playWord("HEL");
 
         // then
         Mockito.verify(dictionary)
                 .isWord("HEL");
-        assertFalse(val);
+        assertEquals("NOT A WORD", val);
         assertTrue(game.playedWords.isEmpty());
     }
 

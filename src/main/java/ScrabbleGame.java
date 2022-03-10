@@ -26,16 +26,16 @@ public class ScrabbleGame {
      *
      * @param word
      */
-    public boolean playWord(String word) {
+    public String playWord(String word) {
         if (!dictionary.isWord(word)) {
-            return false;
+            return "NOT A WORD";
         }
 
         char[] characters = word.toUpperCase(Locale.ROOT).toCharArray();
         List<Character> temp = new ArrayList<>(tiles);
         for (char character : characters) {
             if (!temp.remove((Character) character)) {
-                return false;
+                return "NOT IN TILES";
             }
         }
         tiles = temp;
@@ -46,7 +46,7 @@ public class ScrabbleGame {
             tiles.add(letterPool.getRandomLetter());
         }
 
-        return true;
+        return "TRUE";
     }
 
 }
