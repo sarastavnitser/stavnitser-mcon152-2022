@@ -63,7 +63,6 @@ public class RPN {
                         left = stack.pop();
 
                     } else {
-//                        System.out.println("Syntax error");
 
                         elementsArray.clear();
                         showResult = false;

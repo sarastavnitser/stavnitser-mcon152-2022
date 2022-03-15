@@ -63,7 +63,7 @@ public class ScrabbleFrame extends JFrame {
 
     public void onSubmitClicked(ActionEvent actionEvent) {
         String word = inputField.getText();
-        if (scrabbleGame.playWord(word) == "TRUE") {
+        if (scrabbleGame.playWord(word).equals("TRUE")) {
             score++;
             scoreLabel.setText(String.valueOf(score));
 

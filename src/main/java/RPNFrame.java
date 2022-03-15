@@ -26,9 +26,6 @@ public class RPNFrame extends JFrame {
 
         rpn = new RPN();
 
-
-
-
         JPanel verticalPanel = new JPanel();
         verticalPanel.setLayout(new BoxLayout(verticalPanel, BoxLayout.Y_AXIS));
         add(verticalPanel);
@@ -40,7 +37,6 @@ public class RPNFrame extends JFrame {
         inputField.setPreferredSize(new Dimension(120, 30));
         verticalPanel.add(inputField);
 
-
         JButton calculateButton = new JButton("CALCULATE");
         calculateButton.addActionListener(this::onCalculateClicked);
         verticalPanel.add(calculateButton);
@@ -50,8 +46,6 @@ public class RPNFrame extends JFrame {
 
         resultLabel = new JLabel();
         verticalPanel.add(resultLabel);
-
-
     }
 
     private void onCalculateClicked(ActionEvent actionEvent) {
@@ -60,12 +54,10 @@ public class RPNFrame extends JFrame {
         String result = rpn.findRPNResult(elements);
         results.add(result);
         resultLabel.setText(result);
-
     }
 
     public static void main(String[] args) {
         JFrame frame = new RPNFrame();
         frame.setVisible(true);
-
     }
 }
