@@ -8,9 +8,9 @@ public class ScrabbleGame {
     List<Character> tiles = new ArrayList<>();
     private ScrabbleDictionary dictionary;
     private LetterPool letterPool;
-    private final String notAWord = "NOT A WORD";
-    private final String strTrue = "TRUE";
-    private final String notInTiles = "NOT IN TILES";
+    private static final String notAWord = "NOT A WORD";
+    private static final String strTrue = "TRUE";
+    private static final String notInTiles = "NOT IN TILES";
 
     public ScrabbleGame(
             ScrabbleDictionary dictionary,
@@ -49,6 +49,15 @@ public class ScrabbleGame {
             tiles.add(letterPool.getRandomLetter());
         }
         return strTrue;
+    }
+    public String getNotAWord(){
+        return notAWord;
+    }
+    public String getStrTrue(){
+        return strTrue;
+    }
+    public String getNotInTiles(){
+        return notInTiles;
     }
 
 }
