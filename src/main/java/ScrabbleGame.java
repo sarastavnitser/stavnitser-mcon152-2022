@@ -8,6 +8,9 @@ public class ScrabbleGame {
     List<Character> tiles = new ArrayList<>();
     private ScrabbleDictionary dictionary;
     private LetterPool letterPool;
+    private static final String notAWord = "NOT A WORD";
+    private static final String strTrue = "TRUE";
+    private static final String notInTiles = "NOT IN TILES";
 
     public ScrabbleGame(
             ScrabbleDictionary dictionary,
@@ -26,16 +29,16 @@ public class ScrabbleGame {
      *
      * @param word
      */
-    public boolean playWord(String word) {
+    public String playWord(String word) {
         if (!dictionary.isWord(word)) {
-            return false;
+            return notAWord;
         }
 
         char[] characters = word.toUpperCase(Locale.ROOT).toCharArray();
         List<Character> temp = new ArrayList<>(tiles);
         for (char character : characters) {
             if (!temp.remove((Character) character)) {
-                return false;
+                return notInTiles;
             }
         }
         tiles = temp;
@@ -45,8 +48,16 @@ public class ScrabbleGame {
         for (int i = tiles.size(); i < 7; i++) {
             tiles.add(letterPool.getRandomLetter());
         }
-
-        return true;
+        return strTrue;
+    }
+    public String getNotAWord(){
+        return notAWord;
+    }
+    public String getStrTrue(){
+        return strTrue;
+    }
+    public String getNotInTiles(){
+        return notInTiles;
     }
 
 }
