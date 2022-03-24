@@ -22,6 +22,9 @@ public class ScrabbleGame {
             tiles.add(letterPool.getRandomLetter());
         }
     }
+    public List<Character>getTiles(){
+        return tiles;
+    }
 
     /**
      * If the word exists in the ScrabbleDictionary and the letters exist in the tiles List,
