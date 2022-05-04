@@ -1,6 +1,8 @@
 package weather;
 
+import io.reactivex.Observable;
 import org.junit.jupiter.api.Test;
+import weather.json.CurrentWeather;
 
 import java.io.IOException;
 
@@ -13,10 +15,16 @@ class GetCurrentWeatherTest {
         GetCurrentWeather getCurrentWeather = new GetCurrentWeather();
 
         //when
-        double temp = getCurrentWeather.getTemperature();
+        Observable<CurrentWeather> observable = getCurrentWeather.getCurrentWeather("10019");
+        CurrentWeather currentWeather = observable.blockingFirst();
+
 
         //then
-        assertTrue(temp>0);
+        assertTrue(currentWeather.getTemperature()>0);
+        assertTrue(currentWeather.getMaxTemperature()>0);
+        assertTrue(currentWeather.getMinTemperature()>0);
+        assertNotNull(currentWeather.getDescription());
+        assertNotNull(currentWeather.getIcon());
     }
 
 }
