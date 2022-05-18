@@ -3,41 +3,46 @@ package weather;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import weather.json.CurrentWeather;
+import weather.json.OpenWeatherMapService;
 
 public class CurrentWeatherPresenter {
+
     private final CurrentWeatherFrame view;
-    private final GetCurrentWeather model;
+    private final OpenWeatherMapService model;
     private Disposable disposable;
 
-    public CurrentWeatherPresenter(CurrentWeatherFrame view, GetCurrentWeather model){
+    public CurrentWeatherPresenter(
+            CurrentWeatherFrame view,
+            OpenWeatherMapService model
+    ) {
         this.view = view;
         this.model = model;
     }
 
-    public void loadWeatherFromZipcode(String zipcode){
+    public void loadWeatherFromZipcode(String zipcode) {
         // disposable is used to cancel the request.
         disposable = model.getCurrentWeather(zipcode)
-                //do this request in the background
+                // do this request in the background
                 .subscribeOn(Schedulers.io())
-                //run onNext in a new thread
+                // run onNext in a new Thread
                 .observeOn(Schedulers.newThread())
                 .subscribe(this::onNext, this::onError);
-
-
     }
 
-    public void onError(Throwable throwable) {
-        throwable.printStackTrace();
-    }
-
-    public  void cancel(){
-        if(disposable != null){
+    public void cancel() {
+        if (disposable != null) {
             disposable.dispose();
         }
     }
 
-    public void onNext(CurrentWeather currentWeather) {
-        double fahrenheit = currentWeather.getTemperature();
-        view.setTemperature(fahrenheit);
+    private void onNext(CurrentWeather currentWeather) {
+        double farenheight = currentWeather.getTemperature();
+        view.setTemperature(farenheight);
     }
+
+    private void onError(Throwable throwable) {
+        throwable.printStackTrace();
+        view.showError();
+    }
+
 }

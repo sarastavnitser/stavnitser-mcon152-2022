@@ -1,16 +1,24 @@
 package weather;
 
-import javax.swing.*;
-import java.awt.*;
+import weather.json.OpenWeatherMapServiceFactory;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 
+/**
+ * A JTextField for the zipcode
+ * A JButton to Submit
+ * A JLabel for temperature in F
+ */
 public class CurrentWeatherFrame extends JFrame {
 
-    private  CurrentWeatherPresenter presenter;
-    private JTextField zipcodeInputField;
-    private JButton submitButton;
-    private JLabel tempLabel;
-    private GetCurrentWeather getCurrentWeather = new GetCurrentWeather();
+    private final JTextField zipcodeField;
+    private final JLabel temperatureLabel;
+    private final CurrentWeatherPresenter presenter;
 
     public CurrentWeatherFrame() {
 
@@ -20,35 +28,35 @@ public class CurrentWeatherFrame extends JFrame {
 
         setLayout(new FlowLayout());
 
-        zipcodeInputField = new JTextField("Enter zipcode here");
-        submitButton = new JButton("SUBMIT");
+        zipcodeField = new JTextField("00011");
+        JButton button = new JButton("Submit");
 
-        submitButton.addActionListener(this::onSubmitClicked);
+        button.addActionListener(this::onSubmitClicked);
 
-        tempLabel = new JLabel();
+        temperatureLabel = new JLabel("temp");
 
-        add(zipcodeInputField);
-        add(submitButton);
-        add(tempLabel);
+        add(zipcodeField);
+        add(button);
+        add(temperatureLabel);
 
-        presenter = new CurrentWeatherPresenter(this, new GetCurrentWeather());
+        OpenWeatherMapServiceFactory factory = new OpenWeatherMapServiceFactory();
+        presenter = new CurrentWeatherPresenter(this, factory.getInstance());
     }
 
-    private void onSubmitClicked(ActionEvent actionEvent) {
-        presenter.loadWeatherFromZipcode(zipcodeInputField.getText());
+    public void onSubmitClicked(ActionEvent event) {
+        presenter.loadWeatherFromZipcode(zipcodeField.getText());
     }
 
+    public void setTemperature(double farenheight) {
+        temperatureLabel.setText(String.valueOf(farenheight));
+    }
 
+    public void showError() {
 
-
+    }
 
     public static void main(String[] args) {
-        JFrame frame = new CurrentWeatherFrame();
+        CurrentWeatherFrame frame = new CurrentWeatherFrame();
         frame.setVisible(true);
     }
-    public void setTemperature(double temperature){
-        tempLabel.setText(String.valueOf(temperature));
-    }
-
-
 }

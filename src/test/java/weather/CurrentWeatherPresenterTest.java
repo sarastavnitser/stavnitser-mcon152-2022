@@ -1,41 +1,41 @@
 package weather;
 
-import io.reactivex.Observable;
+import io.reactivex.Single;
 import io.reactivex.plugins.RxJavaPlugins;
 import io.reactivex.schedulers.Schedulers;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestClassOrder;
 import weather.json.CurrentWeather;
+import weather.json.OpenWeatherMapService;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 class CurrentWeatherPresenterTest {
 
-
-
     @BeforeAll
-    static void beforeAllTests(){
+    static void beforeAllTests() {
         // this will run one time before all tests in this class
         RxJavaPlugins.setIoSchedulerHandler((scheduler) -> Schedulers.trampoline());
         RxJavaPlugins.setNewThreadSchedulerHandler((scheduler) -> Schedulers.trampoline());
     }
 
     @BeforeEach
-    public void beforeEachTests(){
-        // this will not run before each test
+    public void beforeEachTest() {
+        // this will get run before each test
     }
+
     @Test
-    void loadWeatherFromZipcpde() {
+    void loadWeatherFromZipcode() {
         // given
         CurrentWeatherFrame view = mock(CurrentWeatherFrame.class);
-        GetCurrentWeather model = mock(GetCurrentWeather.class);
+        OpenWeatherMapService model = mock(OpenWeatherMapService.class);
         CurrentWeatherPresenter presenter = new CurrentWeatherPresenter(view, model);
         CurrentWeather currentWeather = mock(CurrentWeather.class);
         doReturn(100.0).when(currentWeather).getTemperature();
-        doReturn(Observable.just(currentWeather))
+        doReturn(Single.just(currentWeather))
                 .when(model).getCurrentWeather("00000");
 
         // when
@@ -44,5 +44,4 @@ class CurrentWeatherPresenterTest {
         // then
         verify(view).setTemperature(100.0);
     }
-
 }
